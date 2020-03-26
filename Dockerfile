@@ -1,4 +1,4 @@
-FROM node:10.16.3
+FROM node:erbium
 
 WORKDIR /app
 
@@ -6,7 +6,7 @@ COPY package.json ./
 
 RUN mkdir /app/node_modules
 
-RUN npm install --silent
+RUN npm install -f
 
 COPY ./ ./
 
