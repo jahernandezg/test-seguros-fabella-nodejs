@@ -1,7 +1,7 @@
 {
   "name": "seguros-falabella-nodejs-test",
   "version": "1.0.0",
-  "description": "Proyecto test para el cargo de Desarrollador de Software en Seguros Falabella con nodejs, express, mongo, testing, etc.",
+  "description": "Proyecto test para el cargo de Desarrollador de Software en Seguros Falabella con nodejs, express, testing, etc.",
   "main": "index.js",
   "scripts": {
     "start": "node dist/index",

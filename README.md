@@ -1,5 +1,5 @@
 # Test Seguros Fabella Nodejs
-Proyecto test para el cargo de Desarrollador de Software en Seguros Falabella con nodejs, express, mongo, testing, etc.
+Proyecto test para el cargo de Desarrollador de Software en Seguros Falabella con nodejs, express, testing, etc.
 
 # DEV Local
 Proyecto realizado en nodejs con typescript, con una pequeña configuración webpack para mejorar el tiempo de transpilado en las sesiones de desarrollo.
