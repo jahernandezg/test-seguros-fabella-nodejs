@@ -4,7 +4,7 @@ import * as SaletService from "./sales.service";
 import { Sale } from "./sale.interface";
 import { Product } from "../products/product.interface";
 
-import { body, check, validationResult } from 'express-validator';
+import { check, validationResult } from 'express-validator';
 
 
 export const salesRouter = express.Router();
@@ -24,7 +24,7 @@ salesRouter.get("/sold-products", async (req: Request, res: Response) => {
   });
 
 
-// GET products/
+// GET sales/
 
 salesRouter.get("/", async (req: Request, res: Response) => {
     try {
@@ -36,7 +36,7 @@ salesRouter.get("/", async (req: Request, res: Response) => {
     }
   });
   
-  // GET products/:id
+  // GET sales/:id
   
   salesRouter.get("/:id", async (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id, 10);
@@ -51,7 +51,7 @@ salesRouter.get("/", async (req: Request, res: Response) => {
   });
   
   
-  // POST products/
+  // POST sales/
   
   salesRouter.post("/", 
   [
@@ -71,9 +71,9 @@ salesRouter.get("/", async (req: Request, res: Response) => {
         try {
             const sale: Sale = req.body;
         
-            await SaletService.create(sale);
+            const newSale = await SaletService.create(sale);
         
-            res.sendStatus(201);
+            res.sendStatus(201).send(newSale);
           } catch (e) {
             res.status(404).send(e.message);
           }

@@ -64,9 +64,9 @@ productsRouter.get("/", async (req: Request, res: Response) => {
         try {
             const product: Product = req.body;
            
-            await ProductService.create(product);
+            const newProduct = await ProductService.create(product);
         
-            res.sendStatus(201);
+            res.sendStatus(201).send(newProduct);
           } catch (e) {
             res.status(404).send(e.message);
           }
@@ -94,9 +94,9 @@ productsRouter.get("/", async (req: Request, res: Response) => {
     try {
       const product: Product = req.body;
   
-      await ProductService.update(product);
+      const updatedProduct = await ProductService.update(product);
   
-      res.sendStatus(200);
+      res.sendStatus(200).send(updatedProduct);
     } catch (e) {
       res.status(500).send(e.message);
     }

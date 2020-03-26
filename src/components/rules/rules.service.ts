@@ -10,7 +10,7 @@ import { Rules } from './rules.interface';
  * In-Memory Store
  */
 
-const rules: Rules = {
+export const rules: Rules = {
     DISMINUIR_SELLIN: {
         key: 'DISMINUIR_SELLIN',
         name: 'Disminuir SellIn',
@@ -54,34 +54,4 @@ export const findAll = async (): Promise<Rules> => {
     }
   
     throw new Error("No record found");
-  };
-
-export const create = async (newRule: Rule): Promise<void> => {
-    if (rules[newRule.key] === undefined) {
-        rules[newRule.key] = {
-            ...newRule
-        };
-    } else {
-        throw new Error("Rule already exists, You can't overwrite it");
-    }
-};
-
-  export const update = async (updatedRule: Rule): Promise<void> => {
-    if (rules[updatedRule.key]) {
-      rules[updatedRule.key] = updatedRule;
-      return;
-    }
-  
-    throw new Error("No record found to update");
-  };
-
-  export const remove = async (key: string): Promise<void> => {
-    const record: Rule = rules[key];
-  
-    if (record) {
-      delete rules[key];
-      return;
-    }
-  
-    throw new Error("No record found to delete");
   };

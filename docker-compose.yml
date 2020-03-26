@@ -1,0 +1,9 @@
+version: "3.3"
+# Define our services
+services:
+  app:
+    build: .
+    container_name: seguros_falabella_nodejs_test_ARMANDO_HERNANDEZ
+    ports:
+      - 7000:7000
+    restart: always

@@ -282,6 +282,67 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Rules",
+			"item": [
+				{
+					"name": "All Rules",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7000/rules",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7000",
+							"path": [
+								"rules"
+							]
+						},
+						"description": "List all rules"
+					},
+					"response": []
+				},
+				{
+					"name": "Find Rule by key",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7000/rules/:key",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7000",
+							"path": [
+								"rules",
+								":key"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "key",
+									"value": "DISMINUIR_SELLIN"
+								}
+							]
+						},
+						"description": "Find a rule by key"
+					},
+					"response": []
+				}
+			],
+			"description": "Rules endpoints",
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}

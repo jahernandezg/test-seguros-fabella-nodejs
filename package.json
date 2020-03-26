@@ -6,18 +6,23 @@
   "scripts": {
     "start": "node dist/index",
     "webpack": "webpack --config src/webpack.config.ts",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "test": "jest --watch",
+    "coverage": "jest --coverage"
   },
   "author": "José Armando Hernandez Guanare <ja.hernandez.guanare@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "@types/jest": "^25.1.4",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-validator": "^6.4.0",
     "helmet": "^3.21.3",
-    "moment": "^2.24.0"
+    "jest": "^25.1.0",
+    "moment": "^2.24.0",
+    "ts-jest": "^25.2.1"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.0",

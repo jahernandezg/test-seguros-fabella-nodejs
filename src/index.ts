@@ -8,6 +8,7 @@ import cors from "cors";
 import helmet from "helmet";
 import { productsRouter } from "./components/products/products.router";
 import { salesRouter } from "./components/sales/sales.router";
+import { rulesRouter } from "./components/rules/rules.router";
 import { errorHandler } from "./middleware/error.middleware";
 import {notFoundHandler} from "./middleware/notFound.middleware";
 import bodyParser from "body-parser";
@@ -39,7 +40,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 app.use("/sales", salesRouter);
+app.use("/rules", rulesRouter);
 app.use("/products", productsRouter);
 
 

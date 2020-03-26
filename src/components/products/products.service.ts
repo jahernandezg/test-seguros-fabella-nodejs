@@ -10,7 +10,7 @@ import { Products } from './products.interface';
  * In-Memory Store
  */
 
-const products: Products = {
+export const  products: Products = {
     1: {
         id: 1,
         name: "Conbertura",
@@ -73,47 +73,49 @@ export const findAll = async (): Promise<Products> => {
     throw new Error("No record found");
   };
 
-  export const create = async (newProduct: Product): Promise<void> => {
+  export const create = async (newProduct: Product): Promise<Product> => {
     const id = new Date().valueOf();
+    newProduct.id = id;
     newProduct.price = parseInt(newProduct.price.toString(), 10);
     newProduct.sellIn = parseInt(newProduct.sellIn.toString(), 10);
     products[id] = {
       ...newProduct,
       id
     };
+    return newProduct
   };
 
-  export const update = async (updatedProduct: Product): Promise<void> => {
+  export const update = async (updatedProduct: Product): Promise<Product> => {
     if (products[updatedProduct.id]) {
       products[updatedProduct.id] = updatedProduct;
-      return;
+      return updatedProduct;
     }
   
     throw new Error("No record found to update");
   };
 
-  export const remove = async (id: number): Promise<void> => {
+  export const remove = async (id: number): Promise<string> => {
     const record: Product = products[id];
   
     if (record) {
       delete products[id];
-      return;
+      return 'OK';
     }
   
     throw new Error("No record found to delete");
   };
 
-  export const evaluateProducts = async (days: number): Promise<Object[]> => {
+  export const evaluateProducts = async (days: number): Promise<any[]> => {
 
-    if(days <1)  throw new Error("days parameter must be greater than 0");
+    if(days <1)  throw new Error("Days parameter must be greater than 0");
 
     const evaluateProductsArray = [];
     const tmpPRoducts = JSON.parse(JSON.stringify(products));
     for (let i = 0; i < days; i++) {
       const arrProducts: Product[] = [];
 
-      console.log(`-------- day ${i} --------`);
-      console.log(' nombre, sellIn, price');
+      // console.log(`-------- day ${i} --------`);
+      // console.log(' nombre, sellIn, price');
 
       const productsId = Object.keys(products);
       for (let j = 0; j < productsId.length; j++) {
@@ -122,7 +124,7 @@ export const findAll = async (): Promise<Products> => {
         const tmpProduct = JSON.parse(JSON.stringify(tmpPRoducts[id]));
        arrProducts.push(tmpProduct);
        
-       console.log(`${tmpProduct.name}, ${tmpProduct.sellIn}, ${tmpProduct.price}`);
+       // console.log(`${tmpProduct.name}, ${tmpProduct.sellIn}, ${tmpProduct.price}`);
 
       };
       evaluateProductsArray.push({
@@ -145,12 +147,9 @@ export const findAll = async (): Promise<Products> => {
             productApplyRulesClone.sellIn--;
             break;
 
-          case 'DISMINUIR_PRICE':
-            productApplyRulesClone.price--;
-            if(productApplyRulesClone.sellIn <= 0) {
-              productApplyRulesClone.price--;
-            } 
-           
+          case 'DISMINUIR_PRICE':            
+            const factor1 = productApplyRulesClone.sellIn <= 0 ? 2 : 1;
+            productApplyRulesClone.price -= factor1;
             break;
 
           case 'AUMENTAR_PRICE':
@@ -168,25 +167,17 @@ export const findAll = async (): Promise<Products> => {
             break;
 
           case 'DISMINUIR_PRICE_X2':
-            productApplyRulesClone.price -= 2;
-            if(productApplyRulesClone.sellIn <= 0) {
-              productApplyRulesClone.price -= 2;
-            } 
-            break;
-          default:
+            const factor2 = productApplyRulesClone.sellIn <= 0 ? 4 : 2;
+            productApplyRulesClone.price -= factor2;
             break;
         }
 
       });
 
-      //revisamos las reglas globales
-      if(productApplyRulesClone.price <= 0) {
-        productApplyRulesClone.price = 0 ;
-      }
+     
+      productApplyRulesClone.price = productApplyRulesClone.price <= 0 ? 0 : productApplyRulesClone.price;
+      productApplyRulesClone.price = productApplyRulesClone.price > 100 ? 100 : productApplyRulesClone.price;
 
-      if(productApplyRulesClone.price > 100) {
-        productApplyRulesClone.price = 100 ;
-      }
 
     return productApplyRulesClone;
   
